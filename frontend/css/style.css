@@ -1,0 +1,49 @@
+/* Background gradient */
+body {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Card styling */
+.card {
+    border-radius: 15px;
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Navbar styling */
+.navbar {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* Buttons */
+.btn {
+    border-radius: 8px;
+}
+
+/* Task card status colors */
+.status-Pending {
+    color: orange;
+    font-weight: bold;
+}
+
+.status-Completed {
+    color: green;
+    font-weight: bold;
+}
+
+.status-InProgress {
+    color: blue;
+    font-weight: bold;
+}
+
+/* Responsive spacing */
+.container {
+    max-width: 900px;
+}
