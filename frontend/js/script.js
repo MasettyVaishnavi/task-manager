@@ -6,7 +6,7 @@ const BASE_URL = "https://task-manager-production-00e5.up.railway.app";
 if (window.location.pathname.includes("dashboard.html")) {
   const token = localStorage.getItem("token");
   if (!token) {
-    window.location.href = "login.html";
+    window.location.href = "index.html";
   }
 }
 
@@ -33,7 +33,7 @@ async function register() {
     }
 
     alert(data.message || "Registered successfully");
-    window.location.href = "login.html";
+    window.location.href = "index.html";
 
   } catch (error) {
     alert("Server error. Please try again.");
@@ -69,7 +69,7 @@ async function loginUser(email, password) {
 ----------------------------*/
 function logout() {
   localStorage.removeItem("token");
-  window.location.href = "login.html";
+  window.location.href = "index.html";
 }
 
 /* ---------------------------
