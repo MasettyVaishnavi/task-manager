@@ -64,6 +64,10 @@ async function login() {
   if (res.ok && data.token) {
     localStorage.setItem("token", data.token);
     alert("Login successful!");
+    
+    // 👇 ADD THIS LINE
+    window.location.href = "dashboard.html";
+
   } else {
     alert(data.message);
   }
@@ -111,8 +115,16 @@ async function loadTasks() {
 
   try {
     const res = await fetch(`${BASE_URL}/api/tasks`, {
-      headers: { "Authorization": token }
+      headers: { 
+        "Authorization": `Bearer ${token}`   // ✅ FIXED
+      }
     });
+
+    if (!res.ok) {
+      alert("Invalid credentials. Please login again.");
+      window.location.href = "login.html";
+      return;
+    }
 
     const tasks = await res.json();
 
