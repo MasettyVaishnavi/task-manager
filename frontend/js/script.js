@@ -245,3 +245,12 @@ async function editTask(id, oldTitle, oldDescription, oldDueDate) {
 if (window.location.pathname.includes("dashboard.html")) {
   loadTasks();
 }
+
+function checkAuth() {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    alert("Please login first");
+    window.location.href = "index.html"; // or login.html if separate
+  }
+}
