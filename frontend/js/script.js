@@ -47,28 +47,28 @@ async function login() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  try {
-    const res = await fetch(`${BASE_URL}/api/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password })
-    });
+  const res = await fetch(`${BASE_URL}/api/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ email, password })
+  });
 
-    const data = await res.json();
+  const data = await res.json();
 
-    if (!res.ok) {
-      alert(data.message || "Login failed");
-      return;
-    }
+  console.log("LOGIN RESPONSE:", data);
 
-    localStorage.setItem("token", data.token);
-    window.location.href = "dashboard.html";
+  // 🔥 SAVE TOKEN (THIS WAS MISSING BEFORE)
+  localStorage.setItem("token", data.token);
 
-  } catch (error) {
-    alert("Server error. Please try again.");
+  // optional redirect
+  if (data.token) {
+    window.location.href = "dashboard.html"; // or your page
+  } else {
+    alert("Login failed");
   }
 }
-
 /* ---------------------------
    LOGOUT
 ----------------------------*/
