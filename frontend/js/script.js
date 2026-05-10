@@ -43,10 +43,7 @@ async function register() {
 /* ---------------------------
    LOGIN USER
 ----------------------------*/
-async function login() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-
+async function loginUser(email, password) {
   const res = await fetch(`${BASE_URL}/api/auth/login`, {
     method: "POST",
     headers: {
@@ -59,14 +56,12 @@ async function login() {
 
   console.log("LOGIN RESPONSE:", data);
 
-  // 🔥 SAVE TOKEN (THIS WAS MISSING BEFORE)
-  localStorage.setItem("token", data.token);
-
-  // optional redirect
-  if (data.token) {
-    window.location.href = "dashboard.html"; // or your page
+  // ❗ IMPORTANT FIX
+  if (res.ok && data.token) {
+    localStorage.setItem("token", data.token);
+    console.log("TOKEN SAVED:", data.token);
   } else {
-    alert("Login failed");
+    alert(data.message || "Login failed");
   }
 }
 /* ---------------------------
