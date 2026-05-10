@@ -43,7 +43,13 @@ async function register() {
 /* ---------------------------
    LOGIN USER
 ----------------------------*/
-async function loginUser(email, password) {
+async function login() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  console.log("Sending email:", email);
+  console.log("Sending password:", password);
+
   const res = await fetch(`${BASE_URL}/api/auth/login`, {
     method: "POST",
     headers: {
@@ -53,15 +59,13 @@ async function loginUser(email, password) {
   });
 
   const data = await res.json();
-
   console.log("LOGIN RESPONSE:", data);
 
-  // ❗ IMPORTANT FIX
   if (res.ok && data.token) {
     localStorage.setItem("token", data.token);
-    console.log("TOKEN SAVED:", data.token);
+    alert("Login successful!");
   } else {
-    alert(data.message || "Login failed");
+    alert(data.message);
   }
 }
 /* ---------------------------
