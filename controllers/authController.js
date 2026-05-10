@@ -25,15 +25,24 @@ exports.register = async (req, res) => {
 exports.login = (req, res) => {
     const { email, password } = req.body;
 
+    console.log("LOGIN EMAIL:", email);
+    console.log("LOGIN PASSWORD:", password);
+
     const sql = "SELECT * FROM users WHERE email = ?";
     db.query(sql, [email], async (err, results) => {
+        console.log("DB RESULT:", results);
+
         if (err || results.length === 0) {
             return res.status(400).json({ message: "Invalid credentials" });
         }
 
         const user = results[0];
 
+        console.log("DB PASSWORD HASH:", user.password);
+
         const isMatch = await bcrypt.compare(password, user.password);
+
+        console.log("PASSWORD MATCH:", isMatch);
 
         if (!isMatch) {
             return res.status(400).json({ message: "Invalid credentials" });
